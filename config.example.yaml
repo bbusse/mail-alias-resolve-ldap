@@ -1,0 +1,7 @@
+---
+host: 'ldap://ldap.example.com:636'
+user: 'cn=smtp,dc=example.com'
+pw: 'hu7ooPh4aitieyee4aej!u3kaiJah>g!ahj$eiqu~aedeengus9aigh7aiPhae4r'
+basedn: 'ou=people,dc=example.com'
+filter: '(&(objectClass=qmailUser)(|(mail={placeholder})(mailAlternateAddress={placeholder})))'
+target_attribute: 'cn'
