@@ -1,0 +1,32 @@
+---
+name: Build
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and create archive
+        run: |
+          sudo apt install -y curl golang-go
+          go build
+          mv mail-alias-resolve-ldap mail-alias-resolve-ldap-latest-linux-amd64
+          xz mail-alias-resolve-ldap-latest-linux-amd64
+
+      - name: Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          automatic_release_tag: "linux-amd64-latest"
+          files: |
+            mail-alias-resolve-ldap-latest-linux-amd64.xz
