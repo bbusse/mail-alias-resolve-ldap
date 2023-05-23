@@ -112,12 +112,14 @@ func main() {
 		os.Exit(0)
 	}
 
+    /*
 	user := strings.Split(searchString, "@")
 
 	// Prevent recursion loop
 	if result == user[0] {
 		os.Exit(0)
 	}
+    */
 
 	fmt.Printf("%s", result)
 }
