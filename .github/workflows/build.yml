@@ -1,0 +1,28 @@
+---
+name: Build
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and create archive
+        run: |
+          sudo apt install -y curl golang-go
+          go build
+          tar -cJvf mail-alias-resolve-ldap-linux-amd64-latest.tar.xz mail-alias-resolve-ldap
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mail-alias-resolve-ldap-linux-amd64-latest
+          path: mail-alias-resolve-ldap-linux-amd64-latest.tar.xz

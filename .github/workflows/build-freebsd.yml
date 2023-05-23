@@ -1,0 +1,35 @@
+---
+name: FreeBSD Build
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-12
+    name: Build on FreeBSD
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build on FreeBSD
+        uses: vmactions/freebsd-vm@v0.2.9
+        id: build
+        with:
+          usesh: true
+          prepare: |
+            pkg install -y curl go
+
+          run: |
+            go build
+            tar -cJvf mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz ../mail-alias-resolve-ldap
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mail-alias-resolve-ldap-freebsd-amd64
+          path: mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz
