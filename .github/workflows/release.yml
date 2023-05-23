@@ -32,6 +32,8 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         wait-interval: 10
 
+    - uses: actions/download-artifact@v3
+
     - name: Release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
@@ -39,5 +41,5 @@ jobs:
         prerelease: false
         automatic_release_tag: "latest"
         files: |
-          mail-alias-resolve-ldap-linux-amd64-latest.xz
-          mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz
+          mail-alias-resolve-ldap-linux-amd64-latest/mail-alias-resolve-ldap-linux-amd64-latest.tar.xz
+          mail-alias-resolve-ldap-freebsd-amd64-latest/mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz
