@@ -27,11 +27,19 @@ jobs:
           run: |
             go build
             tar -cJvf mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz ../mail-alias-resolve-ldap
-      - name: Release
-        uses: "marvinpinto/action-automatic-releases@latest"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          automatic_release_tag: "freebsd-amd64-latest"
-          files: |
-            mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz
+          name: mail-alias-resolve-ldap-freebsd-amd64
+          path: mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz
+
+      #- name: Release
+      #  uses: "marvinpinto/action-automatic-releases@latest"
+      #  with:
+      #    title: "mail-alias-resolve-ldap"
+      #    repo_token: "${{ secrets.GITHUB_TOKEN }}"
+      #    prerelease: false
+      #    automatic_release_tag: "latest"
+      #    files: |
+      #      mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz
