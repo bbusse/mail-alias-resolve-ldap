@@ -35,5 +35,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.PKG_NAME }}-freebsd-amd64
+          name: ${{ env.PKG_NAME }}-freebsd-amd64-latest
           path: ${{ env.PKG_NAME }}-freebsd-amd64-latest.tar.xz
