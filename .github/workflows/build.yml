@@ -23,6 +23,7 @@ jobs:
           sudo apt install -y curl golang-go
           go build
           tar -cJvf ${{ env.PKG_NAME }}-linux-amd64-latest.tar.xz ${{ env.PKG_NAME }}
+          ls -al
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
