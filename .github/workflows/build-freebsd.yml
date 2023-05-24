@@ -10,6 +10,10 @@ on:
       - '**.md'
   workflow_dispatch:
 
+env:
+  PKG_NAME: mail-alias-resolve-ldap
+  PKG_DEPS: "curl go"
+
 jobs:
   build:
     runs-on: macos-12
@@ -22,14 +26,14 @@ jobs:
         with:
           usesh: true
           prepare: |
-            pkg install -y curl go
+            pkg install -y ${{ env.PKG_DEPS }}
 
           run: |
             go build
-            tar -cJvf mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz ../mail-alias-resolve-ldap
+            tar -cJvf ${{ env.PKG_NAME }}-freebsd-amd64-latest.tar.xz ${{ env.PKG_NAME }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mail-alias-resolve-ldap-freebsd-amd64
-          path: mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz
+          name: ${{ env.PKG_NAME }}-freebsd-amd64
+          path: ${{ env.PKG_NAME }}-freebsd-amd64-latest.tar.xz

@@ -10,6 +10,9 @@ on:
       - '**.md'
   workflow_dispatch:
 
+env:
+  PKG_NAME: ${{ env.PKG_NAME }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,10 +22,10 @@ jobs:
         run: |
           sudo apt install -y curl golang-go
           go build
-          tar -cJvf mail-alias-resolve-ldap-linux-amd64-latest.tar.xz mail-alias-resolve-ldap
+          tar -cJvf ${{ env.PKG_NAME }}-linux-amd64-latest.tar.xz ${{ env.PKG_NAME }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mail-alias-resolve-ldap-linux-amd64-latest
-          path: mail-alias-resolve-ldap-linux-amd64-latest.tar.xz
+          name: ${{ env.PKG_NAME }}-linux-amd64-latest
+          path: ${{ env.PKG_NAME }}-linux-amd64-latest.tar.xz
