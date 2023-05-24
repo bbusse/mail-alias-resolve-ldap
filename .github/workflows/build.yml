@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 env:
-  PKG_NAME: ${{ env.PKG_NAME }}
+  PKG_NAME: mail-alias-resolve-ldap
 
 jobs:
   build:
