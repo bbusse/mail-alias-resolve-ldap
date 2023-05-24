@@ -32,6 +32,18 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         wait-interval: 10
 
+    - name: Download FreeBSD artifact
+      id: download-freebsd-artifact
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: build-freebsd.yml
+
+    - name: Download Linux artifacts
+      id: download-linux-artifacts
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: build.yml
+
     - name: Release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
@@ -39,5 +51,5 @@ jobs:
         prerelease: false
         automatic_release_tag: "latest"
         files: |
-          mail-alias-resolve-ldap/mail-alias-resolve-ldap-linux-amd64-latest.tar.xz
-          mail-alias-resolve-ldap/mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz
+          mail-alias-resolve-ldap-linux-amd64-latest.tar.xz
+          mail-alias-resolve-ldap-freebsd-amd64-latest.tar.xz
